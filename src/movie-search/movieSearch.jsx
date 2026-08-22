@@ -1,14 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Css from "./movieSearch.module.css"
 export default function movieSearch() {
   const [search, setSearch] = useState("");
-  const [movies, setMovies] = useState("");
-
+  const [movies, setMovies] = useState([]);
+  const [storeMovie, setStoreMovie] = useState([]);
+  const key = "3dd035b5";
   const clickMovie = () => {
-    setSearch("");
-setMovies(search);
+    setMovies(search)
   }
+  useEffect(() => {
+    if (movies === "") {
+      alert("please enter something");
 
+    } else {
+      async function fetchMovie() {
+        const newMovies = await fetch(`http://www.omdbapi.com/?apikey=${key}&s=${movies}`);
+        const response = await newMovies.json();
+        setStoreMovie(response.Search || []);
+        console.log(response)
+      }
+      fetchMovie();
+    }
+  }, [movies]);
 
   return (
     <>
@@ -20,8 +33,15 @@ setMovies(search);
           <button onClick={() => {
             clickMovie()
           }}>Search</button>
-          <h1>{search}</h1>
-          <h2>{movies}</h2>
+
+          {storeMovie.map((item) => (
+           <div key={item.imdbID}>
+               <h1>{item.Title}</h1>
+            <p>{item.Year}</p>
+         <img src={item.Poster} alt="" />
+            </div>
+            
+          ))}
         </div>
 
       </div>

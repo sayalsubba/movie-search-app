@@ -3,12 +3,19 @@
     margin: 0;
     scroll-behavior: smooth;
 }
-.dark{
+
+.dark {
+    height: auto;
+    width: 100%;
     background-color: aqua;
 }
-.white{
+
+.white {
+    height: auto;
+    width: 100%;
     background-color: white;
 }
+
 .mainPrt {
     width: inherit;
 }

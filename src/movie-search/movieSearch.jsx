@@ -45,7 +45,6 @@ export default function movieSearch() {
                    <img src={item.Poster} alt="" />
                 <h1>{item.Title}</h1>
                 <p>{item.Year}</p>
-             
               </div>
             ))}
           </div>
